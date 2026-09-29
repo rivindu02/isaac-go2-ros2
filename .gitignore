@@ -22,3 +22,10 @@ outputs/
 
 # Logs
 *.log
+# Local sim artifacts
+${data}/
+*.etli
+.pytest_cache/
+mesh.usd
+textures/
+zed_*_.png

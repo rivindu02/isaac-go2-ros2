@@ -1,7 +1,7 @@
 from isaaclab.scene import InteractiveSceneCfg
 from isaaclab_assets.robots.unitree import UNITREE_GO2_CFG
 
-from isaaclab.sensors import RayCasterCfg, patterns, ContactSensorCfg
+from isaaclab.sensors import RayCasterCfg, patterns, ContactSensorCfg, ImuCfg
 from isaaclab.utils import configclass
 from isaaclab.assets import ArticulationCfg, AssetBaseCfg
 import isaaclab.sim as sim_utils
@@ -52,11 +52,21 @@ class Go2SimCfg(InteractiveSceneCfg):
     height_scanner = RayCasterCfg(
         prim_path="{ENV_REGEX_NS}/Go2/base",
         offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 20)), 
-        attach_yaw_only=True,
+        ray_alignment="yaw",
         pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]), 
         debug_vis=False,
         mesh_prim_paths=["/World/ground"],
     )
+
+    # ZED 2i IMU — attached at the Go2 base for now. If your voxel-mapping model
+    # is sensitive to the true IMU-to-base offset (real ZED 2i IMU sits inside the
+    # camera housing, not at the robot's base_link), add a dedicated child Xform
+    # prim at the measured offset and point prim_path at that instead.
+    imu_zed = ImuCfg(
+        prim_path="{ENV_REGEX_NS}/Go2/base",
+        update_period=0.0,  # sample every physics step; downsample to 400Hz on publish
+    )
+
 
 @configclass
 class ActionsCfg:
@@ -175,15 +185,26 @@ class Go2RSLEnvCfg(ManagerBasedRLEnvCfg):
         if self.scene.height_scanner is not None:
             self.scene.height_scanner.update_period = self.decimation * self.sim.dt
 
-def camera_follow(env):
+def camera_follow(env, offset=(-4.0, 0.0, 5.0)):
+    """Position the main viewport (follow) camera relative to the robot.
+
+    `offset` was hardcoded to (-4.0, 0.0, 5.0) -- 4m behind, 5m above the
+    robot's root position. That's fine under the warehouse's tall roof
+    trusses (~8-10m ceiling), but for a lower-ceiling indoor scene (office,
+    hospital, ~2.4-3m ceiling) a 5m-high camera ends up ABOVE the roof,
+    outside the building, rendering nothing but exterior/void -- a
+    permanently blank/white viewport no matter what the robot does. Pass a
+    lower offset (e.g. (-3.0, 0.0, 2.0)) for indoor low-ceiling
+    environments; see cfg.camera_follow_offset in cfg/sim.yaml.
+    """
     if (env.unwrapped.scene.num_envs == 1):
         robot_position = env.unwrapped.scene["unitree_go2"].data.root_state_w[0, :3].cpu().numpy()
         robot_orientation = env.unwrapped.scene["unitree_go2"].data.root_state_w[0, 3:7].cpu().numpy()
-        rotation = R.from_quat([robot_orientation[1], robot_orientation[2], 
+        rotation = R.from_quat([robot_orientation[1], robot_orientation[2],
                                 robot_orientation[3], robot_orientation[0]])
         yaw = rotation.as_euler('zyx')[0]
         yaw_rotation = R.from_euler('z', yaw).as_matrix()
         set_camera_view(
-            yaw_rotation.dot(np.asarray([-4.0, 0.0, 5.0])) + robot_position,
+            yaw_rotation.dot(np.asarray(offset)) + robot_position,
             robot_position
         )

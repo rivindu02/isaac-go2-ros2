@@ -75,12 +75,20 @@ if [ "${AUTO_BUILD}" = "true" ]; then
     fi
 fi
 
+# Start Foxglove and Image Compression in the background (Always)
+echo "Starting Foxglove Bridge..."
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765 > /tmp/foxglove.log 2>&1 &
+
+echo "Starting Image Transport (Compression)..."
+ros2 run image_transport republish raw compressed --ros-args -r in:=/zed2i/zed_node/left/image_rect_color -r out/compressed:=/zed2i/zed_node/left/image_rect_color/compressed > /tmp/image_transport.log 2>&1 &
+
 # Auto run program
 if [ "${AUTO_RUN}" = "true" ]; then
     echo "Launching main program..."
     cd /home/ubuntu/isaac-go2-ros2
     python isaac_go2_ros2.py
 fi
+
 
 # If no command is provided, start an idle loop to keep the container alive
 if [ $# -eq 0 ]; then

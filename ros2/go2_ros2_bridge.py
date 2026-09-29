@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped, Twist, TransformStamped
-from sensor_msgs.msg import PointCloud2, PointField, Image
+from sensor_msgs.msg import PointCloud2, PointField, Image, Imu
 from sensor_msgs_py import point_cloud2
 from tf2_ros import TransformBroadcaster
 from tf2_ros.static_transform_broadcaster import StaticTransformBroadcaster
@@ -23,7 +23,7 @@ from isaacsim.ros2.bridge import collect_namespace, read_camera_info
 
 
 class RobotDataManager(Node):
-    def __init__(self, env, lidar_annotators, cameras, cfg):
+    def __init__(self, env, lidar_annotators, cameras, cfg, zed_cameras=None):
         super().__init__("robot_data_manager")
         self.cfg = cfg
         self.create_ros_time_graph()
@@ -35,6 +35,10 @@ class RobotDataManager(Node):
         self.num_envs = env.unwrapped.scene.num_envs
         self.lidar_annotators = lidar_annotators
         self.cameras = cameras
+        # zed_cameras: (zed_left_list, zed_right_list) from SensorManager.add_zed_camera(),
+        # or None if you haven't wired the ZED into the sim run yet.
+        self.zed_left, self.zed_right = zed_cameras if zed_cameras is not None else (None, None)
+        self.enable_zed = zed_cameras is not None and getattr(cfg.sensor, "enable_zed", False)
         self.points = []
         
         # ROS2 Broadcaster
@@ -45,6 +49,7 @@ class RobotDataManager(Node):
         self.pose_pub = []
         self.lidar_pub = []
         self.semantic_seg_img_vis_pub = []
+        self.imu_pub = []
 
         # ROS2 Subscriber
         self.cmd_vel_sub = []
@@ -66,6 +71,9 @@ class RobotDataManager(Node):
                 self.semantic_seg_img_vis_pub.append(
                     self.create_publisher(Image, "unitree_go2/front_cam/semantic_segmentation_image_vis", 10)
                 )
+                self.imu_pub.append(
+                    self.create_publisher(Imu, "zed2i/zed_node/imu/data", 10)
+                )
                 self.cmd_vel_sub.append(
                     self.create_subscription(Twist, "unitree_go2/cmd_vel", 
                     lambda msg: self.cmd_vel_callback(msg, 0), 10)
@@ -85,6 +93,9 @@ class RobotDataManager(Node):
                 self.semantic_seg_img_vis_pub.append(
                     self.create_publisher(Image, f"unitree_go2_{i}/front_cam/semantic_segmentation_image_vis", 10)
                 )
+                self.imu_pub.append(
+                    self.create_publisher(Imu, f"unitree_go2_{i}/zed2i/zed_node/imu/data", 10)
+                )
                 self.cmd_vel_sub.append(
                     self.create_subscription(Twist, f"unitree_go2_{i}/cmd_vel", 
                     lambda msg, env_idx=i: self.cmd_vel_callback(msg, env_idx), 10)
@@ -102,8 +113,17 @@ class RobotDataManager(Node):
         self.lidar_freq = 15.0
         self.odom_pose_pub_time = time.time()
         self.lidar_pub_time = time.time() 
+
+        # ZED 2i IMU spec: 400Hz. 
+        if self.enable_zed:
+            self.imu_freq = 400.0
+            self.imu_pub_time = time.time()
+
+
         self.create_static_transform()
-        self.create_camera_publisher()  
+        self.create_camera_publisher()
+        if self.enable_zed:
+            self.create_zed_publisher()
 
  
     def create_ros_time_graph(self):
@@ -193,6 +213,56 @@ class RobotDataManager(Node):
             
             # Publish the transform
             camera_broadcaster.sendTransform(base_cam_transform)
+
+            # -------------------------------------------------------------
+            # ZED 2i left optical frame + IMU frame.
+            # Translation/rotation below are placeholders — replace with the
+            # measured mount offset from your real robot's base_link so the
+            # TF tree matches exactly.
+            if self.enable_zed:
+                zed_cam_broadcaster = StaticTransformBroadcaster(self)
+                base_zed_transform = TransformStamped()
+                base_zed_transform.header.stamp = self.get_clock().now().to_msg()
+                if (self.num_envs == 1):
+                    base_zed_transform.header.frame_id = "unitree_go2/base_link"
+                    base_zed_transform.child_frame_id = "zed2i_left_camera_optical_frame"
+                else:
+                    base_zed_transform.header.frame_id = f"unitree_go2_{i}/base_link"
+                    base_zed_transform.child_frame_id = f"unitree_go2_{i}/zed2i_left_camera_optical_frame"
+
+                base_zed_transform.transform.translation.x = 0.35
+                base_zed_transform.transform.translation.y = 0.06
+                base_zed_transform.transform.translation.z = 0.15
+
+                # Same optical-frame convention as front_cam above
+                base_zed_transform.transform.rotation.x = -0.5
+                base_zed_transform.transform.rotation.y = 0.5
+                base_zed_transform.transform.rotation.z = -0.5
+                base_zed_transform.transform.rotation.w = 0.5
+
+                zed_cam_broadcaster.sendTransform(base_zed_transform)
+
+                zed_imu_broadcaster = StaticTransformBroadcaster(self)
+                base_imu_transform = TransformStamped()
+                base_imu_transform.header.stamp = self.get_clock().now().to_msg()
+                if (self.num_envs == 1):
+                    base_imu_transform.header.frame_id = "unitree_go2/base_link"
+                    base_imu_transform.child_frame_id = "zed2i_imu_link"
+                else:
+                    base_imu_transform.header.frame_id = f"unitree_go2_{i}/base_link"
+                    base_imu_transform.child_frame_id = f"unitree_go2_{i}/zed2i_imu_link"
+
+                # ZED 2i IMU sits inside the housing near the left camera —
+                # replace with the real measured offset if you need it exact.
+                base_imu_transform.transform.translation.x = 0.35
+                base_imu_transform.transform.translation.y = 0.0
+                base_imu_transform.transform.translation.z = 0.15
+                base_imu_transform.transform.rotation.x = 0.0
+                base_imu_transform.transform.rotation.y = 0.0
+                base_imu_transform.transform.rotation.z = 0.0
+                base_imu_transform.transform.rotation.w = 1.0
+
+                zed_imu_broadcaster.sendTransform(base_imu_transform)
     
     def create_camera_publisher(self):
         # self.pub_image_graph()
@@ -205,6 +275,11 @@ class RobotDataManager(Node):
                 self.pub_semantic_image()
             # self.pub_cam_depth_cloud()
             self.publish_camera_info()
+
+    def create_zed_publisher(self):
+        self.pub_zed_color_image()
+        self.pub_zed_depth_image()
+        self.publish_zed_camera_info()
     
     def publish_odom(self, base_pos, base_rot, base_lin_vel_b, base_ang_vel_b, env_idx):
         odom_msg = Odometry()
@@ -274,6 +349,31 @@ class RobotDataManager(Node):
         point_cloud = point_cloud2.create_cloud(point_cloud.header, fields, points)
         self.lidar_pub[env_idx].publish(point_cloud)        
 
+    def imu_timer_callback(self):
+        for i in range(self.num_envs):
+            self.publish_imu(i)
+
+    def publish_imu(self, env_idx):
+        imu_data = self.env.unwrapped.scene["imu_zed"].data
+        msg = Imu()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        if (self.num_envs == 1):
+            msg.header.frame_id = "zed2i_imu_link"
+        else:
+            msg.header.frame_id = f"unitree_go2_{env_idx}/zed2i_imu_link"
+        msg.angular_velocity.x = imu_data.ang_vel_b[env_idx, 0].item()
+        msg.angular_velocity.y = imu_data.ang_vel_b[env_idx, 1].item()
+        msg.angular_velocity.z = imu_data.ang_vel_b[env_idx, 2].item()
+        msg.linear_acceleration.x = imu_data.lin_acc_b[env_idx, 0].item()
+        msg.linear_acceleration.y = imu_data.lin_acc_b[env_idx, 1].item()
+        msg.linear_acceleration.z = imu_data.lin_acc_b[env_idx, 2].item()
+        # orientation left as identity/unset (covariance[0] = -1) unless imu_data
+        # exposes a fused orientation quaternion — the real ZED 2i's data_raw
+        # topic also leaves orientation unset, only .../imu/data includes fused
+        # orientation from its onboard sensor fusion.
+        msg.orientation_covariance[0] = -1.0
+        self.imu_pub[env_idx].publish(msg)
+
     def pub_ros2_data_callback(self):
         robot_data = self.env.unwrapped.scene["unitree_go2"].data
         for i in range(self.num_envs):
@@ -294,6 +394,7 @@ class RobotDataManager(Node):
         pub_lidar = False
         dt_odom_pose = time.time() - self.odom_pose_pub_time
         dt_lidar = time.time() - self.lidar_pub_time
+        
         if (dt_odom_pose >= 1./self.odom_pose_freq):
             pub_odom_pose = True
         
@@ -316,6 +417,13 @@ class RobotDataManager(Node):
                 self.lidar_pub_time = time.time()
                 for i in range(self.num_envs):
                     self.publish_lidar_data(self.lidar_annotators[i].get_data()["data"].reshape(-1, 3), i)
+
+        if self.enable_zed:
+            dt_imu = time.time() - self.imu_pub_time
+            if (dt_imu >= 1./self.imu_freq):
+                self.imu_pub_time = time.time()
+                for i in range(self.num_envs):
+                    self.publish_imu(i)
 
     def cmd_vel_callback(self, msg, env_idx):
         go2_ctrl.base_vel_cmd_input[env_idx][0] = msg.linear.x
@@ -591,4 +699,114 @@ class RobotDataManager(Node):
             )
 
             # Set step input of the Isaac Simulation Gate nodes upstream of ROS publishers to control their execution rate
-            og.Controller.attribute(gate_path + ".inputs:step").set(step_size)            
+            og.Controller.attribute(gate_path + ".inputs:step").set(step_size)
+
+    # ------------------------------------------------------------------
+    # ZED 2i publishers — mirror the front_cam pattern above exactly, but
+    # under the zed2i/zed_node/... topic names used by the real zed-ros2-wrapper.
+    # If your real launch file namespaces things differently, change the
+    # topic_name/frame_id strings below to match — that's the one thing that
+    # actually has to line up for your voxel-mapping node to be portable.
+
+    def pub_zed_color_image(self):
+        for i in range(self.num_envs):
+            render_product = self.zed_left[i]._render_product_path
+            step_size = 1
+            if (self.num_envs == 1):
+                topic_name = "zed2i/zed_node/left/image_rect_color"
+                frame_id = "zed2i_left_camera_optical_frame"
+            else:
+                topic_name = f"unitree_go2_{i}/zed2i/zed_node/left/image_rect_color"
+                frame_id = f"unitree_go2_{i}/zed2i_left_camera_optical_frame"
+            node_namespace = ""
+            queue_size = 1
+
+            rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(sd.SensorType.Rgb.name)
+            writer = rep.writers.get(rv + "ROS2PublishImage")
+            writer.initialize(
+                frameId=frame_id,
+                nodeNamespace=node_namespace,
+                queueSize=queue_size,
+                topicName=topic_name,
+            )
+            writer.attach([render_product])
+
+            gate_path = omni.syntheticdata.SyntheticData._get_node_path(
+                rv + "IsaacSimulationGate", render_product
+            )
+            og.Controller.attribute(gate_path + ".inputs:step").set(step_size)
+
+    def pub_zed_depth_image(self):
+        """
+        NOTE — this publishes Isaac's ground-truth DistanceToImagePlane depth,
+        same shortcut as pub_depth_image() for front_cam. A real ZED 2i computes
+        depth via stereo matching, with real noise/holes and a 0.2-20m range.
+        If behavioral parity with the real sensor matters (not just interface
+        parity), replace this with a node that runs actual stereo block matching
+        (e.g. cv2.StereoSGBM) over pub_zed_color_image()'s left/right output,
+        using the SAME matching code you'd run on the real robot, and publish
+        that instead of this ground-truth pass-through.
+        """
+        for i in range(self.num_envs):
+            render_product = self.zed_left[i]._render_product_path
+            step_size = 1
+            if (self.num_envs == 1):
+                topic_name = "zed2i/zed_node/depth/depth_registered"
+                frame_id = "zed2i_left_camera_optical_frame"
+            else:
+                topic_name = f"unitree_go2_{i}/zed2i/zed_node/depth/depth_registered"
+                frame_id = f"unitree_go2_{i}/zed2i_left_camera_optical_frame"
+            node_namespace = ""
+            queue_size = 1
+
+            rv = omni.syntheticdata.SyntheticData.convert_sensor_type_to_rendervar(
+                sd.SensorType.DistanceToImagePlane.name
+            )
+            writer = rep.writers.get(rv + "ROS2PublishImage")
+            writer.initialize(
+                frameId=frame_id,
+                nodeNamespace=node_namespace,
+                queueSize=queue_size,
+                topicName=topic_name,
+            )
+            writer.attach([render_product])
+
+            gate_path = omni.syntheticdata.SyntheticData._get_node_path(
+                rv + "IsaacSimulationGate", render_product
+            )
+            og.Controller.attribute(gate_path + ".inputs:step").set(step_size)
+
+    def publish_zed_camera_info(self):
+        for i in range(self.num_envs):
+            render_product = self.zed_left[i]._render_product_path
+            step_size = 1
+            if (self.num_envs == 1):
+                topic_name = "zed2i/zed_node/left/camera_info"
+            else:
+                topic_name = f"unitree_go2_{i}/zed2i/zed_node/left/camera_info"
+            queue_size = 1
+            node_namespace = ""
+            frame_id = "zed2i_left_camera_optical_frame"
+
+            writer = rep.writers.get("ROS2PublishCameraInfo")
+            camera_info = read_camera_info(render_product_path=render_product)
+            writer.initialize(
+                frameId=frame_id,
+                nodeNamespace=node_namespace,
+                queueSize=queue_size,
+                topicName=topic_name,
+                width=camera_info["width"],
+                height=camera_info["height"],
+                projectionType=camera_info["projectionType"],
+                k=camera_info["k"].reshape([1, 9]),
+                r=camera_info["r"].reshape([1, 9]),
+                p=camera_info["p"].reshape([1, 12]),
+                physicalDistortionModel=camera_info["physicalDistortionModel"],
+                physicalDistortionCoefficients=camera_info["physicalDistortionCoefficients"],
+            )
+            writer.attach([render_product])
+
+            gate_path = omni.syntheticdata.SyntheticData._get_node_path(
+                "PostProcessDispatch" + "IsaacSimulationGate", render_product
+            )
+            og.Controller.attribute(gate_path + ".inputs:step").set(step_size)

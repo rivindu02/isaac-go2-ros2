@@ -13,11 +13,20 @@ parser = argparse.ArgumentParser(description="Tutorial on running the cartpole R
 # append AppLauncher cli args
 AppLauncher.add_app_launcher_args(parser)
 # parse the arguments
-args_cli = parser.parse_args()
+args_cli, extra_args = parser.parse_known_args()
+args_cli.headless = True
+args_cli.enable_cameras = True
+args_cli.livestream = 2
+
+import sys
+import os
+original_argv = sys.argv.copy()
+os.environ["PUBLIC_IP"] = os.environ.get("SERVER_IP", "100.110.199.98")
 
 # launch omniverse app
 app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app
+sys.argv = original_argv + ["hydra.run.dir=/tmp/outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}"]
 
 """Rest everything follows."""
 
@@ -40,6 +49,24 @@ def run_simulator(cfg):
     go2_env_cfg.scene.num_envs = cfg.num_envs
     go2_env_cfg.decimation = math.ceil(1./go2_env_cfg.sim.dt/cfg.freq)
     go2_env_cfg.sim.render_interval = go2_env_cfg.decimation
+    if cfg.env_name == "office":
+        # The default spawn (0,0,0.4) coincides with a cluster of phantom
+        # furniture-prototype collision registered near world origin in this
+        # asset (confirmed via per-foot raycast diagnostics: hits a drinks
+        # machine/toilet/printer/etc that are nowhere near this location
+        # visually -- a floor-prim bbox scan confirms all of Office's real
+        # furniture sits 10+ meters away from the origin). That phantom
+        # collision pins the robot in place regardless of cmd_vel. Relocate
+        # spawn to open floor confirmed clear by that scan, before the
+        # articulation is constructed (default_root_state is baked from
+        # init_state at construction time, so this must happen here rather
+        # than after get_rsl_rough_policy()). dataclasses.replace (not direct
+        # attribute mutation) avoids mutating the init_state object shared by
+        # reference with the global UNITREE_GO2_CFG.
+        import dataclasses
+        go2_env_cfg.scene.unitree_go2.init_state = dataclasses.replace(
+            go2_env_cfg.scene.unitree_go2.init_state, pos=(2.0, 5.0, 0.4)
+        )
     go2_ctrl.init_base_vel_cmd(cfg.num_envs)
     # env, policy = go2_ctrl.get_rsl_flat_policy(go2_env_cfg)
     env, policy = go2_ctrl.get_rsl_rough_policy(go2_env_cfg)
@@ -59,11 +86,21 @@ def run_simulator(cfg):
         sim_env.create_warehouse_shelves_env() # warehouse shelves
     elif (cfg.env_name == "full-warehouse"):
         sim_env.create_full_warehouse_env() # full warehouse
-
+    elif (cfg.env_name == "office"):
+        sim_env.create_office_env() # office
+    elif (cfg.env_name == "dataset"):
+        sim_env.create_dataset_env(cfg.dataset_path) # custom dataset mesh
     # Sensor setup
     sm = go2_sensors.SensorManager(cfg.num_envs)
     lidar_annotators = sm.add_rtx_lidar()
     cameras = sm.add_camera(cfg.freq)
+
+    # ZED 2i stereo pair — only created if enabled in cfg/sim.yaml (sensor.enable_zed: True).
+    # Fill in the real per-unit baseline/focal-length/mount values, see go2_sensors.py.
+    zed_cameras = None
+    if getattr(cfg.sensor, "enable_zed", False):
+        zed_left, zed_right = sm.add_zed_camera(cfg.freq)
+        zed_cameras = (zed_left, zed_right)
 
     # Keyboard control
     system_input = carb.input.acquire_input_interface()
@@ -72,7 +109,11 @@ def run_simulator(cfg):
     
     # ROS2 Bridge
     rclpy.init()
-    dm = go2_ros2_bridge.RobotDataManager(env, lidar_annotators, cameras, cfg)
+    dm = go2_ros2_bridge.RobotDataManager(env, lidar_annotators, cameras, cfg, zed_cameras=zed_cameras)
+    
+    import threading
+    spin_thread = threading.Thread(target=rclpy.spin, args=(dm,), daemon=True)
+    spin_thread.start()
 
     # Run simulation
     sim_step_dt = float(go2_env_cfg.sim.dt * go2_env_cfg.decimation)
@@ -88,11 +129,10 @@ def run_simulator(cfg):
 
             # # ROS2 data
             dm.pub_ros2_data()
-            rclpy.spin_once(dm)
 
             # Camera follow
             if (cfg.camera_follow):
-                camera_follow(env)
+                camera_follow(env, offset=tuple(getattr(cfg, "camera_follow_offset", (-4.0, 0.0, 5.0))))
 
             # limit loop time
             elapsed_time = time.time() - start_time

@@ -49,7 +49,9 @@ services:
       # Mount X11 server
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
 
+      - ./entrypoint.sh:/entrypoint.sh:ro
       - ../:/home/ubuntu/isaac-go2-ros2
+      - ~/dataset:/home/ubuntu/dataset:rw
     
     stop_grace_period: 3s
 
