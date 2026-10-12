@@ -77,10 +77,18 @@ fi
 
 # Start Foxglove and Image Compression in the background (Always)
 echo "Starting Foxglove Bridge..."
-ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765 > /tmp/foxglove.log 2>&1 &
+# send_buffer_limit 2 MB (default 10 MB): over a slow link the bridge drops stale
+# frames instead of queueing ~10 s of them, so remote viewing stays live.
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765 send_buffer_limit:=2000000 > /tmp/foxglove.log 2>&1 &
 
 echo "Starting Image Transport (Compression)..."
-ros2 run image_transport republish raw compressed --ros-args -r in:=/zed2i/zed_node/left/image_rect_color -r out/compressed:=/zed2i/zed_node/left/image_rect_color/compressed > /tmp/image_transport.log 2>&1 &
+# jpeg_quality 75 (default 95): ~3x smaller frames, visually the same in Foxglove.
+ros2 run image_transport republish raw compressed --ros-args -r in:=/zed2i/zed_node/left/image_rect_color -r out/compressed:=/zed2i/zed_node/left/image_rect_color/compressed -p out.jpeg_quality:=75 > /tmp/image_transport.log 2>&1 &
+
+# Light copies of heavy topics for remote viewing (originals untouched):
+#   /unitree_go2/lidar/point_cloud_viz, /zed2i/zed_node/depth/depth_registered_viz
+echo "Starting viz relay..."
+/usr/bin/python3 /home/ubuntu/isaac-go2-ros2/ros2/viz_relay.py > /tmp/viz_relay.log 2>&1 &
 
 # Auto run program
 if [ "${AUTO_RUN}" = "true" ]; then
