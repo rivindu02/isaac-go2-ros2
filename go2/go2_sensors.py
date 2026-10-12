@@ -101,6 +101,11 @@ class SensorManager:
             right.initialize()
             left.set_focal_length(focal_length_mm / 10.0)   # Camera API expects cm
             right.set_focal_length(focal_length_mm / 10.0)
+            # USD's default clippingRange is (1, 1e6) m, which cuts away everything
+            # within 1 m of the lens (near objects and the floor in front of the robot).
+            # The real ZED 2i sees from ~0.3 m, so use a near plane well below that.
+            left.set_clipping_range(near_distance=0.05, far_distance=1000.0)
+            right.set_clipping_range(near_distance=0.05, far_distance=1000.0)
 
             # Always call set_horizontal_aperture() -- it's the only thing that
             # makes Isaac Sim conform verticalAperture to `resolution`'s aspect

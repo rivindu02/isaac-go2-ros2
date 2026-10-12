@@ -116,7 +116,7 @@ class CommandsCfg:
     base_vel_cmd = mdp.UniformVelocityCommandCfg(
         asset_name="unitree_go2",
         resampling_time_range=(0.0, 0.0),
-        debug_vis=True,
+        debug_vis=False,  # arrow markers cost ~7% of each step and show up in ZED images
         ranges=mdp.UniformVelocityCommandCfg.Ranges(
             lin_vel_x=(0.0, 0.0), lin_vel_y=(0.0, 0.0), ang_vel_z=(0.0, 0.0), heading=(0, 0)
         ),

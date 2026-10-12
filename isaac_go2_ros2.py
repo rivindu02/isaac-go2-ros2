@@ -92,8 +92,9 @@ def run_simulator(cfg):
         sim_env.create_dataset_env(cfg.dataset_path) # custom dataset mesh
     # Sensor setup
     sm = go2_sensors.SensorManager(cfg.num_envs)
-    lidar_annotators = sm.add_rtx_lidar()
-    cameras = sm.add_camera(cfg.freq)
+    # Each sensor adds a render product that renders every step, so only create enabled ones.
+    lidar_annotators = sm.add_rtx_lidar() if cfg.sensor.enable_lidar else []
+    cameras = sm.add_camera(cfg.freq) if cfg.sensor.enable_camera else []
 
     # ZED 2i stereo pair — only created if enabled in cfg/sim.yaml (sensor.enable_zed: True).
     # Fill in the real per-unit baseline/focal-length/mount values, see go2_sensors.py.

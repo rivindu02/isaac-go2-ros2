@@ -11,7 +11,7 @@ env_name: full-warehouse
 dataset_path: "/home/ubuntu/isaac-go2-ros2/mesh.usd"
 
 sensor:
-  enable_lidar: True
+  enable_lidar: False
   enable_camera: False
   enable_zed: True
   color_image: False
