@@ -118,6 +118,21 @@ def run_simulator(cfg):
     spin_thread = threading.Thread(target=rclpy.spin, args=(dm,), daemon=True)
     spin_thread.start()
 
+    # Object mover: re-place scene objects on command (see ros2/object_mover.py)
+    mover = None
+    mover_roots = {"warehouse": "/World/Warehouse", "warehouse-forklifts": "/World/Warehouse",
+                   "warehouse-shelves": "/World/Warehouse", "full-warehouse": "/World/Warehouse",
+                   "office": "/World/Office", "hospital": "/World/Hospital"}
+    mover_cfg = cfg.get("object_mover", None)
+    if mover_cfg is not None and mover_cfg.get("enable", False) and cfg.env_name in mover_roots:
+        from rclpy.executors import SingleThreadedExecutor
+        from ros2.object_mover import ObjectMover
+        mover = ObjectMover(mover_cfg, mover_roots[cfg.env_name])
+        # own executor: the global one is already spun by spin_thread
+        mover_executor = SingleThreadedExecutor()
+        mover_executor.add_node(mover)
+        threading.Thread(target=mover_executor.spin, daemon=True).start()
+
     # Run simulation
     sim_step_dt = float(go2_env_cfg.sim.dt * go2_env_cfg.decimation)
     obs, _ = env.reset()
@@ -132,6 +147,10 @@ def run_simulator(cfg):
 
             # # ROS2 data
             dm.pub_ros2_data()
+
+            # apply queued object moves (USD edits must run on this thread)
+            if mover is not None:
+                mover.step()
 
             # Camera follow
             if (cfg.camera_follow):

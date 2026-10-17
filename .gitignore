@@ -29,3 +29,6 @@ ${data}/
 mesh.usd
 textures/
 zed_*_.png
+
+# Object mover move logs (runtime output)
+logs/

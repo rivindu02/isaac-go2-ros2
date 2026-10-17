@@ -1,0 +1,1477 @@
+# Movable sim objects. Add target spots per object as  name: [x, y, yaw_deg]
+# (sim world frame, x/y = object centre). Written by list_sim_objects.py --save,
+# re-running it keeps existing spots.
+Barrel_15108:
+  home: [-15.43, 20.356, 0.0]
+  label: barrel
+  spots: {}
+Barrel_15110:
+  home: [-15.43, 19.648, 0.0]
+  label: barrel
+  spots: {}
+Barrel_15112:
+  home: [-15.519, 19.083, 0.0]
+  label: barrel
+  spots: {}
+Barrel_15114:
+  home: [-15.43, 18.519, 0.0]
+  label: barrel
+  spots: {}
+Barrel_15116:
+  home: [-15.519, 17.954, 0.0]
+  label: barrel
+  spots: {}
+Barrel_15118:
+  home: [-15.43, 17.389, 0.0]
+  label: barrel
+  spots: {}
+Barrel_15494:
+  home: [-15.489, 10.059, 0.0]
+  label: barrel
+  spots: {}
+Barrel_15496:
+  home: [-15.489, 9.558, 0.0]
+  label: barrel
+  spots: {}
+Bottle_15519:
+  home: [-15.851, 12.581, -2.5]
+  label: bottle
+  spots: {}
+Bottle_15521:
+  home: [-15.851, 12.48, 2.7]
+  label: bottle
+  spots: {}
+Bottle_15523:
+  home: [-15.851, 12.378, 2.4]
+  label: bottle
+  spots: {}
+Bottle_15525:
+  home: [-15.824, 12.258, -2.1]
+  label: bottle
+  spots: {}
+Bottle_15527:
+  home: [-15.828, 12.093, -1.6]
+  label: bottle
+  spots: {}
+Bottle_15529:
+  home: [-15.828, 11.904, 2.4]
+  label: bottle
+  spots: {}
+Bottle_15531:
+  home: [-15.87, 11.739, -2.6]
+  label: bottle
+  spots: {}
+Bottle_15533:
+  home: [-15.851, 11.621, 0.5]
+  label: bottle
+  spots: {}
+Bottle_15535:
+  home: [-15.828, 11.479, 0.4]
+  label: bottle
+  spots: {}
+Bottle_15537:
+  home: [-15.828, 11.293, -2.4]
+  label: bottle
+  spots: {}
+Bottle_15539:
+  home: [-15.824, 11.127, 1.6]
+  label: bottle
+  spots: {}
+Bottle_15541:
+  home: [-15.824, 10.989, -0.4]
+  label: bottle
+  spots: {}
+Bottle_15543:
+  home: [-15.87, 10.853, -1.4]
+  label: bottle
+  spots: {}
+Bottle_15545:
+  home: [-15.851, 10.737, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15547:
+  home: [-15.717, 12.259, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15549:
+  home: [-15.684, 12.093, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15551:
+  home: [-15.707, 11.948, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15553:
+  home: [-15.79, 11.757, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15555:
+  home: [-15.68, 11.504, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15557:
+  home: [-15.707, 11.337, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15559:
+  home: [-15.699, 11.146, 0.0]
+  label: bottle
+  spots: {}
+Bottle_15852:
+  home: [-15.101, 10.713, -176.2]
+  label: bottle
+  spots: {}
+Bottle_15854:
+  home: [-15.101, 10.817, -175.4]
+  label: bottle
+  spots: {}
+Bottle_15856:
+  home: [-15.083, 10.939, 179.0]
+  label: bottle
+  spots: {}
+Bottle_15858:
+  home: [-15.101, 11.056, -178.4]
+  label: bottle
+  spots: {}
+Bottle_15860:
+  home: [-15.101, 11.156, -179.0]
+  label: bottle
+  spots: {}
+Bottle_15862:
+  home: [-15.101, 11.255, -176.2]
+  label: bottle
+  spots: {}
+Bottle_15864:
+  home: [-15.101, 11.358, -177.2]
+  label: bottle
+  spots: {}
+Bottle_15866:
+  home: [-15.101, 11.46, 178.7]
+  label: bottle
+  spots: {}
+Bottle_15868:
+  home: [-15.129, 11.579, 178.9]
+  label: bottle
+  spots: {}
+Bottle_15870:
+  home: [-15.125, 11.741, -179.6]
+  label: bottle
+  spots: {}
+Bottle_15872:
+  home: [-15.083, 11.901, 176.1]
+  label: bottle
+  spots: {}
+Bottle_15874:
+  home: [-15.125, 12.064, -177.1]
+  label: bottle
+  spots: {}
+Bottle_15876:
+  home: [-15.125, 12.256, -178.5]
+  label: bottle
+  spots: {}
+Bottle_15878:
+  home: [-15.083, 12.419, 177.1]
+  label: bottle
+  spots: {}
+Bottle_15880:
+  home: [-15.101, 12.537, -179.1]
+  label: bottle
+  spots: {}
+Bottle_15882:
+  home: [-15.235, 11.578, -180.0]
+  label: bottle
+  spots: {}
+Bottle_15884:
+  home: [-15.227, 11.715, -180.0]
+  label: bottle
+  spots: {}
+Bottle_15886:
+  home: [-15.273, 12.039, -180.0]
+  label: bottle
+  spots: {}
+Bottle_15888:
+  home: [-15.269, 12.256, -180.0]
+  label: bottle
+  spots: {}
+Bottle_21:
+  home: [-15.717, 10.989, 0.0]
+  label: bottle
+  spots: {}
+Box_11158:
+  home: [-20.71, 24.485, 0.0]
+  label: box
+  spots: {}
+Box_11160:
+  home: [-20.71, 24.235, 0.0]
+  label: box
+  spots: {}
+Box_11162:
+  home: [-20.65, 23.86, 0.0]
+  label: box
+  spots: {}
+Box_11164:
+  home: [-20.65, 23.36, 0.0]
+  label: box
+  spots: {}
+Box_11166:
+  home: [-20.371, 22.782, 0.0]
+  label: box
+  spots: {}
+Box_11168:
+  home: [-20.65, 22.223, 0.0]
+  label: box
+  spots: {}
+Box_11170:
+  home: [-20.71, 21.848, 0.0]
+  label: box
+  spots: {}
+Box_11172:
+  home: [-20.65, 21.473, 0.0]
+  label: box
+  spots: {}
+Box_11174:
+  home: [-20.12, 24.36, 0.0]
+  label: box
+  spots: {}
+Box_11176:
+  home: [-20.21, 23.955, 0.0]
+  label: box
+  spots: {}
+Box_11178:
+  home: [-20.15, 23.41, 0.0]
+  label: box
+  spots: {}
+Box_11180:
+  home: [-20.16, 22.188, 0.0]
+  label: box
+  spots: {}
+Box_11182:
+  home: [-20.15, 21.323, 0.0]
+  label: box
+  spots: {}
+Box_11542:
+  home: [-20.61, 20.42, 2.6]
+  label: box
+  spots: {}
+Box_11544:
+  home: [-20.599, 19.887, 179.2]
+  label: box
+  spots: {}
+Box_11546:
+  home: [-20.606, 19.387, -0.7]
+  label: box
+  spots: {}
+Box_11548:
+  home: [-20.607, 18.881, -177.8]
+  label: box
+  spots: {}
+Box_11550:
+  home: [-20.601, 18.357, -177.9]
+  label: box
+  spots: {}
+Box_11552:
+  home: [-20.601, 17.839, -2.3]
+  label: box
+  spots: {}
+Box_11554:
+  home: [-20.08, 20.41, -179.7]
+  label: box
+  spots: {}
+Box_11556:
+  home: [-20.088, 19.916, -0.2]
+  label: box
+  spots: {}
+Box_11558:
+  home: [-20.089, 19.414, -0.7]
+  label: box
+  spots: {}
+Box_11560:
+  home: [-20.086, 18.906, -178.1]
+  label: box
+  spots: {}
+Box_11562:
+  home: [-20.081, 18.384, 0.8]
+  label: box
+  spots: {}
+Box_11564:
+  home: [-20.086, 17.882, -177.9]
+  label: box
+  spots: {}
+Box_11566:
+  home: [-20.081, 17.359, -2.5]
+  label: box
+  spots: {}
+Box_12722:
+  home: [-20.66, 16.38, 0.2]
+  label: box
+  spots: {}
+Box_12724:
+  home: [-20.659, 15.877, 1.6]
+  label: box
+  spots: {}
+Box_12726:
+  home: [-20.653, 15.357, 1.5]
+  label: box
+  spots: {}
+Box_12728:
+  home: [-20.653, 14.845, 178.8]
+  label: box
+  spots: {}
+Box_12730:
+  home: [-20.655, 14.336, -1.3]
+  label: box
+  spots: {}
+Box_12732:
+  home: [-20.654, 13.824, 0.9]
+  label: box
+  spots: {}
+Box_12734:
+  home: [-20.656, 13.318, -179.4]
+  label: box
+  spots: {}
+Box_12736:
+  home: [-20.122, 16.378, 178.6]
+  label: box
+  spots: {}
+Box_12738:
+  home: [-20.119, 15.862, -179.3]
+  label: box
+  spots: {}
+Box_12740:
+  home: [-20.122, 15.359, 178.7]
+  label: box
+  spots: {}
+Box_12742:
+  home: [-20.119, 14.845, 178.9]
+  label: box
+  spots: {}
+Box_12744:
+  home: [-20.12, 14.336, -178.2]
+  label: box
+  spots: {}
+Box_12746:
+  home: [-20.117, 13.818, 178.5]
+  label: box
+  spots: {}
+Box_12748:
+  home: [-20.119, 13.307, -178.6]
+  label: box
+  spots: {}
+Box_13062:
+  home: [-20.67, 12.44, 180.0]
+  label: box
+  spots: {}
+Box_13064:
+  home: [-20.675, 11.94, 0.0]
+  label: box
+  spots: {}
+Box_13066:
+  home: [-20.68, 11.44, 0.0]
+  label: box
+  spots: {}
+Box_13068:
+  home: [-20.674, 10.94, 180.0]
+  label: box
+  spots: {}
+Box_13070:
+  home: [-20.676, 10.44, 180.0]
+  label: box
+  spots: {}
+Box_13072:
+  home: [-20.674, 9.94, 0.0]
+  label: box
+  spots: {}
+Box_13074:
+  home: [-20.662, 9.44, 0.0]
+  label: box
+  spots: {}
+Box_13076:
+  home: [-20.148, 12.44, 0.0]
+  label: box
+  spots: {}
+Box_13078:
+  home: [-20.158, 11.94, 0.0]
+  label: box
+  spots: {}
+Box_13080:
+  home: [-20.143, 11.44, 0.0]
+  label: box
+  spots: {}
+Box_13082:
+  home: [-20.142, 10.94, 0.0]
+  label: box
+  spots: {}
+Box_13084:
+  home: [-20.147, 10.44, 180.0]
+  label: box
+  spots: {}
+Box_13086:
+  home: [-20.148, 9.94, 0.0]
+  label: box
+  spots: {}
+Box_13088:
+  home: [-20.144, 9.44, 180.0]
+  label: box
+  spots: {}
+Box_18193:
+  home: [-10.38, 24.26, 180.0]
+  label: box
+  spots: {}
+Box_18195:
+  home: [-10.38, 23.35, 180.0]
+  label: box
+  spots: {}
+Box_18197:
+  home: [-10.38, 22.46, 180.0]
+  label: box
+  spots: {}
+Box_18199:
+  home: [-10.38, 21.56, 0.0]
+  label: box
+  spots: {}
+Box_19293:
+  home: [-10.44, 20.26, -0.2]
+  label: box
+  spots: {}
+Box_19295:
+  home: [-10.439, 19.366, -178.0]
+  label: box
+  spots: {}
+Box_19297:
+  home: [-10.432, 18.481, -0.2]
+  label: box
+  spots: {}
+Box_19299:
+  home: [-10.439, 17.59, -177.3]
+  label: box
+  spots: {}
+Box_19545:
+  home: [-10.44, 16.23, 3.0]
+  label: box
+  spots: {}
+Box_19547:
+  home: [-10.427, 15.675, -175.2]
+  label: box
+  spots: {}
+Box_19549:
+  home: [-10.42, 15.108, 175.1]
+  label: box
+  spots: {}
+Box_19551:
+  home: [-10.42, 14.55, 5.0]
+  label: box
+  spots: {}
+Box_19553:
+  home: [-10.42, 13.991, -179.7]
+  label: box
+  spots: {}
+Box_19555:
+  home: [-10.438, 13.514, -175.5]
+  label: box
+  spots: {}
+Box_21059:
+  home: [-10.5, 12.5, -178.2]
+  label: box
+  spots: {}
+Box_21061:
+  home: [-10.492, 11.927, -18.4]
+  label: box
+  spots: {}
+Box_21063:
+  home: [-10.414, 11.306, 5.1]
+  label: box
+  spots: {}
+Box_21065:
+  home: [-10.459, 10.748, 174.6]
+  label: box
+  spots: {}
+Box_21067:
+  home: [-10.478, 10.122, 164.8]
+  label: box
+  spots: {}
+Box_21069:
+  home: [-10.443, 9.524, -10.8]
+  label: box
+  spots: {}
+Box_21815:
+  home: [-5.57, 12.17, -0.9]
+  label: box
+  spots: {}
+Box_21817:
+  home: [-5.566, 11.269, 179.6]
+  label: box
+  spots: {}
+Box_21819:
+  home: [-5.568, 10.357, -179.1]
+  label: box
+  spots: {}
+Box_21821:
+  home: [-5.566, 9.477, 179.7]
+  label: box
+  spots: {}
+Box_21823:
+  home: [-5.59, 16.19, 0.8]
+  label: box
+  spots: {}
+Box_21825:
+  home: [-5.587, 15.316, 179.1]
+  label: box
+  spots: {}
+Box_21827:
+  home: [-5.586, 14.384, -180.0]
+  label: box
+  spots: {}
+Box_21829:
+  home: [-5.59, 13.42, 0.3]
+  label: box
+  spots: {}
+Box_25972:
+  home: [-5.765, 20.06, 177.7]
+  label: box
+  spots: {}
+Box_25974:
+  home: [-5.764, 19.531, -2.6]
+  label: box
+  spots: {}
+Box_25976:
+  home: [-5.75, 19.007, -1.0]
+  label: box
+  spots: {}
+Box_25978:
+  home: [-5.774, 18.505, -177.4]
+  label: box
+  spots: {}
+Box_25980:
+  home: [-5.758, 17.976, -2.4]
+  label: box
+  spots: {}
+Box_25982:
+  home: [-5.761, 17.457, -179.7]
+  label: box
+  spots: {}
+Box_25984:
+  home: [-5.248, 20.059, -178.9]
+  label: box
+  spots: {}
+Box_25986:
+  home: [-5.248, 19.546, 1.4]
+  label: box
+  spots: {}
+Box_25988:
+  home: [-5.253, 19.033, 1.3]
+  label: box
+  spots: {}
+Box_25990:
+  home: [-5.253, 18.522, -178.5]
+  label: box
+  spots: {}
+Box_25992:
+  home: [-5.248, 18.009, -0.7]
+  label: box
+  spots: {}
+Box_25994:
+  home: [-5.245, 17.506, -177.5]
+  label: box
+  spots: {}
+Box_29060:
+  home: [-5.82, 24.275, -1.2]
+  label: box
+  spots: {}
+Box_29062:
+  home: [-5.738, 24.013, 0.2]
+  label: box
+  spots: {}
+Box_29064:
+  home: [-5.731, 23.765, 179.4]
+  label: box
+  spots: {}
+Box_29066:
+  home: [-5.841, 23.509, 179.3]
+  label: box
+  spots: {}
+Box_29068:
+  home: [-5.746, 23.254, 179.8]
+  label: box
+  spots: {}
+Box_29070:
+  home: [-5.833, 23.005, 2.8]
+  label: box
+  spots: {}
+Box_29072:
+  home: [-5.807, 22.728, 180.0]
+  label: box
+  spots: {}
+Box_29074:
+  home: [-5.774, 22.487, 178.9]
+  label: box
+  spots: {}
+Box_29076:
+  home: [-5.841, 22.226, 0.1]
+  label: box
+  spots: {}
+Box_29078:
+  home: [-5.7, 21.979, -178.6]
+  label: box
+  spots: {}
+Box_29080:
+  home: [-5.822, 21.715, 1.9]
+  label: box
+  spots: {}
+Box_29082:
+  home: [-5.757, 21.451, -1.6]
+  label: box
+  spots: {}
+Box_29084:
+  home: [-5.841, 21.191, 179.3]
+  label: box
+  spots: {}
+Box_29086:
+  home: [-5.292, 24.273, 179.0]
+  label: box
+  spots: {}
+Box_29088:
+  home: [-5.19, 24.015, -1.8]
+  label: box
+  spots: {}
+Box_29090:
+  home: [-5.276, 23.751, 0.3]
+  label: box
+  spots: {}
+Box_29092:
+  home: [-5.263, 23.504, 179.4]
+  label: box
+  spots: {}
+Box_29094:
+  home: [-5.201, 23.249, -177.4]
+  label: box
+  spots: {}
+Box_29096:
+  home: [-5.221, 22.976, 178.9]
+  label: box
+  spots: {}
+Box_29098:
+  home: [-5.296, 22.723, -1.7]
+  label: box
+  spots: {}
+Box_29100:
+  home: [-5.219, 22.461, -178.4]
+  label: box
+  spots: {}
+Box_29102:
+  home: [-5.316, 22.201, -177.5]
+  label: box
+  spots: {}
+Box_29104:
+  home: [-5.281, 21.932, -178.8]
+  label: box
+  spots: {}
+Box_29106:
+  home: [-5.231, 21.678, 0.3]
+  label: box
+  spots: {}
+Box_29108:
+  home: [-5.179, 21.429, -1.7]
+  label: box
+  spots: {}
+Box_29110:
+  home: [-5.179, 21.163, 2.5]
+  label: box
+  spots: {}
+Box_33802:
+  home: [-0.45, 24.24, 2.0]
+  label: box
+  spots: {}
+Box_33804:
+  home: [-0.442, 23.325, 178.4]
+  label: box
+  spots: {}
+Box_33806:
+  home: [-0.443, 22.423, -178.3]
+  label: box
+  spots: {}
+Box_33808:
+  home: [-0.443, 21.528, 0.8]
+  label: box
+  spots: {}
+Box_33842:
+  home: [-0.47, 20.28, 178.2]
+  label: box
+  spots: {}
+Box_33844:
+  home: [-0.462, 19.377, 178.3]
+  label: box
+  spots: {}
+Box_33846:
+  home: [-0.463, 18.483, -0.7]
+  label: box
+  spots: {}
+Box_33848:
+  home: [-0.467, 17.591, 0.5]
+  label: box
+  spots: {}
+Box_33982:
+  home: [-0.56, 16.335, -176.1]
+  label: box
+  spots: {}
+Box_33984:
+  home: [-0.552, 15.597, -178.9]
+  label: box
+  spots: {}
+Box_33986:
+  home: [-0.558, 14.839, -1.9]
+  label: box
+  spots: {}
+Box_33988:
+  home: [-0.556, 14.143, 176.4]
+  label: box
+  spots: {}
+Box_33990:
+  home: [-0.552, 13.424, -0.8]
+  label: box
+  spots: {}
+Box_3689:
+  home: [-25.29, 12.365, 7.6]
+  label: box
+  spots: {}
+Box_3691:
+  home: [-25.28, 11.862, 4.4]
+  label: box
+  spots: {}
+Box_3693:
+  home: [-25.34, 11.301, 4.7]
+  label: box
+  spots: {}
+Box_3695:
+  home: [-25.18, 10.896, 3.7]
+  label: box
+  spots: {}
+Box_3697:
+  home: [-25.23, 10.162, -4.8]
+  label: box
+  spots: {}
+Box_3699:
+  home: [-25.23, 9.592, 6.6]
+  label: box
+  spots: {}
+Box_37256:
+  home: [-0.82, 12.31, 2.6]
+  label: box
+  spots: {}
+Box_37258:
+  home: [-0.809, 11.776, 176.7]
+  label: box
+  spots: {}
+Box_37260:
+  home: [-0.806, 11.246, 0.8]
+  label: box
+  spots: {}
+Box_37262:
+  home: [-0.817, 10.75, 2.1]
+  label: box
+  spots: {}
+Box_37264:
+  home: [-0.811, 10.226, 179.8]
+  label: box
+  spots: {}
+Box_37266:
+  home: [-0.819, 9.732, 0.3]
+  label: box
+  spots: {}
+Box_37268:
+  home: [-0.281, 12.309, 177.4]
+  label: box
+  spots: {}
+Box_37270:
+  home: [-0.271, 11.776, -178.5]
+  label: box
+  spots: {}
+Box_37272:
+  home: [-0.276, 11.268, 179.1]
+  label: box
+  spots: {}
+Box_37274:
+  home: [-0.279, 10.763, -3.9]
+  label: box
+  spots: {}
+Box_37276:
+  home: [-0.266, 10.217, -2.1]
+  label: box
+  spots: {}
+Box_37278:
+  home: [-0.273, 9.707, 0.5]
+  label: box
+  spots: {}
+Box_38946:
+  home: [4.4, 16.28, -1.8]
+  label: box
+  spots: {}
+Box_38948:
+  home: [4.408, 15.627, 178.1]
+  label: box
+  spots: {}
+Box_38950:
+  home: [4.408, 14.953, -177.6]
+  label: box
+  spots: {}
+Box_38952:
+  home: [4.41, 14.202, 0.6]
+  label: box
+  spots: {}
+Box_38954:
+  home: [4.402, 13.425, 177.4]
+  label: box
+  spots: {}
+Box_40744:
+  home: [4.083, 12.42, 179.4]
+  label: box
+  spots: {}
+Box_40746:
+  home: [4.098, 11.912, -178.7]
+  label: box
+  spots: {}
+Box_40748:
+  home: [4.114, 11.398, 179.0]
+  label: box
+  spots: {}
+Box_40750:
+  home: [4.094, 10.891, 178.1]
+  label: box
+  spots: {}
+Box_40752:
+  home: [4.116, 10.371, -0.6]
+  label: box
+  spots: {}
+Box_40754:
+  home: [4.107, 9.871, -180.0]
+  label: box
+  spots: {}
+Box_40756:
+  home: [4.098, 9.374, -0.4]
+  label: box
+  spots: {}
+Box_40758:
+  home: [4.616, 12.418, -0.6]
+  label: box
+  spots: {}
+Box_40760:
+  home: [4.624, 11.912, 0.4]
+  label: box
+  spots: {}
+Box_40762:
+  home: [4.616, 11.41, 179.9]
+  label: box
+  spots: {}
+Box_40764:
+  home: [4.611, 10.91, -0.3]
+  label: box
+  spots: {}
+Box_40766:
+  home: [4.625, 10.407, 0.7]
+  label: box
+  spots: {}
+Box_40768:
+  home: [4.636, 9.9, 179.4]
+  label: box
+  spots: {}
+Box_40770:
+  home: [4.609, 9.395, -0.2]
+  label: box
+  spots: {}
+Box_4242:
+  home: [-25.22, 24.2, 0.0]
+  label: box
+  spots: {}
+Box_4244:
+  home: [-25.22, 23.7, 0.2]
+  label: box
+  spots: {}
+Box_42456:
+  home: [4.189, 20.42, 177.5]
+  label: box
+  spots: {}
+Box_42458:
+  home: [4.199, 19.888, -179.2]
+  label: box
+  spots: {}
+Box_4246:
+  home: [-25.219, 23.197, 1.9]
+  label: box
+  spots: {}
+Box_42460:
+  home: [4.194, 19.388, -178.3]
+  label: box
+  spots: {}
+Box_42462:
+  home: [4.188, 18.87, -177.9]
+  label: box
+  spots: {}
+Box_42464:
+  home: [4.207, 18.35, 177.5]
+  label: box
+  spots: {}
+Box_42466:
+  home: [4.209, 17.827, 0.9]
+  label: box
+  spots: {}
+Box_42468:
+  home: [4.199, 17.327, 178.3]
+  label: box
+  spots: {}
+Box_42470:
+  home: [4.709, 20.413, -179.7]
+  label: box
+  spots: {}
+Box_42472:
+  home: [4.701, 19.916, -177.6]
+  label: box
+  spots: {}
+Box_42474:
+  home: [4.699, 19.387, 2.9]
+  label: box
+  spots: {}
+Box_42476:
+  home: [4.701, 18.86, -177.8]
+  label: box
+  spots: {}
+Box_42478:
+  home: [4.714, 18.344, -3.0]
+  label: box
+  spots: {}
+Box_4248:
+  home: [-25.212, 22.663, 178.6]
+  label: box
+  spots: {}
+Box_42480:
+  home: [4.714, 17.816, -0.2]
+  label: box
+  spots: {}
+Box_42482:
+  home: [4.694, 17.325, 177.9]
+  label: box
+  spots: {}
+Box_4250:
+  home: [-25.214, 22.15, -179.4]
+  label: box
+  spots: {}
+Box_4252:
+  home: [-25.217, 21.648, 179.3]
+  label: box
+  spots: {}
+Box_42540:
+  home: [4.319, 24.292, 2.3]
+  label: box
+  spots: {}
+Box_42542:
+  home: [4.28, 23.867, 2.3]
+  label: box
+  spots: {}
+Box_42544:
+  home: [4.28, 23.437, -2.4]
+  label: box
+  spots: {}
+Box_42546:
+  home: [4.18, 22.909, -1.1]
+  label: box
+  spots: {}
+Box_42548:
+  home: [4.28, 22.399, 2.2]
+  label: box
+  spots: {}
+Box_42550:
+  home: [4.65, 21.998, 0.8]
+  label: box
+  spots: {}
+Box_42552:
+  home: [4.12, 21.818, -2.1]
+  label: box
+  spots: {}
+Box_42554:
+  home: [4.12, 21.461, 1.7]
+  label: box
+  spots: {}
+Box_42556:
+  home: [4.65, 21.564, -2.1]
+  label: box
+  spots: {}
+Box_4899:
+  home: [-25.268, 16.18, 179.2]
+  label: box
+  spots: {}
+Box_4901:
+  home: [-25.384, 15.665, -179.9]
+  label: box
+  spots: {}
+Box_4903:
+  home: [-25.356, 15.168, 0.3]
+  label: box
+  spots: {}
+Box_4905:
+  home: [-25.346, 14.663, 179.3]
+  label: box
+  spots: {}
+Box_4907:
+  home: [-25.387, 14.153, -178.9]
+  label: box
+  spots: {}
+Box_4909:
+  home: [-25.337, 13.636, -2.0]
+  label: box
+  spots: {}
+Box_5420:
+  home: [-25.19, 20.25, -0.7]
+  label: box
+  spots: {}
+Box_5422:
+  home: [-25.187, 19.361, -1.8]
+  label: box
+  spots: {}
+Box_5424:
+  home: [-25.182, 18.511, 0.3]
+  label: box
+  spots: {}
+Box_5426:
+  home: [-25.189, 17.635, 0.8]
+  label: box
+  spots: {}
+SM_BarelPlastic_C_01_25:
+  home: [-2.064, 10.966, 171.4]
+  label: barel
+  spots: {}
+SM_BarelPlastic_C_2:
+  home: [-3.966, 11.664, 70.0]
+  label: barel
+  spots: {}
+SM_BottlePlasticD_01_35:
+  home: [-3.991, 12.523, 174.0]
+  label: bottle
+  spots: {}
+SM_BottlePlasticD_2:
+  home: [-2.425, 11.61, -50.0]
+  label: bottle
+  spots: {}
+SM_BottlePlasticD_3:
+  home: [-4.077, 10.998, 176.6]
+  label: bottle
+  spots: {}
+SM_BottlePlasticD_4:
+  home: [-3.638, 10.633, -113.5]
+  label: bottle
+  spots: {}
+SM_BucketPlastic_B_41:
+  home: [-3.195, 12.663, 70.0]
+  label: bucket
+  spots: {}
+SM_CardBoxA_02_2:
+  home: [-3.09, 11.592, 0.0]
+  label: cardbox
+  spots: {}
+SM_CardBoxA_3:
+  home: [-3.082, 10.656, 40.0]
+  label: cardbox
+  spots: {}
+SM_CardBoxB_02_32:
+  home: [-1.911, 11.828, -36.6]
+  label: cardbox
+  spots: {}
+SM_CardBoxB_3:
+  home: [-4.474, 11.247, -169.5]
+  label: cardbox
+  spots: {}
+SM_CardBoxD_03_9:
+  home: [-3.658, 11.08, -10.0]
+  label: cardbox
+  spots: {}
+SM_CardBoxD_04_6:
+  home: [-2.57, 10.21, -30.0]
+  label: cardbox
+  spots: {}
+SM_CardBoxD_4:
+  home: [-2.696, 12.085, -50.0]
+  label: cardbox
+  spots: {}
+SM_CratePlasticNote_B_03_18:
+  home: [-3.012, 9.776, -150.0]
+  label: crate
+  spots: {}
+SM_CratePlasticNote_B_5:
+  home: [-3.898, 12.13, -50.0]
+  label: crate
+  spots: {}
+SM_CratePlastic_D_01_47:
+  home: [-4.19, 12.625, -30.0]
+  label: crate
+  spots: {}
+SM_CratePlastic_E_03_44:
+  home: [-1.37, 11.33, 20.0]
+  label: crate
+  spots: {}
+SM_PaletteA_1:
+  home: [-25.282, 11.005, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_11:
+  home: [-25.321, 13.679, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_12:
+  home: [-25.324, 14.902, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1852:
+  home: [-20.365, 24.03, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1859:
+  home: [-20.368, 22.814, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1860:
+  home: [-20.365, 21.591, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1945:
+  home: [-20.329, 20.09, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1946:
+  home: [-20.326, 18.867, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1947:
+  home: [-20.329, 17.65, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1952:
+  home: [-20.405, 16.08, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1953:
+  home: [-20.408, 14.864, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1954:
+  home: [-20.405, 13.64, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1974:
+  home: [-20.408, 9.668, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1975:
+  home: [-20.405, 10.885, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_1976:
+  home: [-20.408, 12.108, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_301:
+  home: [-25.285, 9.788, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3035:
+  home: [-10.425, 9.788, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3039:
+  home: [-10.422, 11.005, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3040:
+  home: [-10.425, 12.228, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_317:
+  home: [-25.285, 12.228, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_318:
+  home: [-25.245, 20.128, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_319:
+  home: [-25.321, 16.119, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3259:
+  home: [-10.382, 24.1, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3260:
+  home: [-10.385, 22.883, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3261:
+  home: [-10.382, 21.66, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_346:
+  home: [4.415, 24.03, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_356:
+  home: [-10.461, 13.679, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_357:
+  home: [-15.455, 9.788, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_358:
+  home: [-15.452, 11.005, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_359:
+  home: [-15.455, 12.228, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_360:
+  home: [-10.464, 14.902, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_361:
+  home: [-10.461, 16.119, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_362:
+  home: [-10.385, 17.688, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_363:
+  home: [-10.382, 18.905, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_364:
+  home: [-10.385, 20.128, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_370:
+  home: [4.412, 22.814, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_371:
+  home: [4.415, 21.591, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3870:
+  home: [-0.515, 9.788, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3873:
+  home: [-0.512, 11.005, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3874:
+  home: [-0.515, 12.228, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3932:
+  home: [-0.551, 13.679, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3933:
+  home: [-0.554, 14.902, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3934:
+  home: [-0.551, 16.119, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3960:
+  home: [-0.475, 17.688, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3961:
+  home: [-0.472, 18.905, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3962:
+  home: [-0.475, 20.128, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3982:
+  home: [-0.472, 24.1, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3983:
+  home: [-0.475, 22.883, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_3984:
+  home: [-0.472, 21.66, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_418:
+  home: [4.451, 20.09, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_419:
+  home: [4.454, 18.867, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_420:
+  home: [4.451, 17.65, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_421:
+  home: [4.375, 16.08, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_422:
+  home: [4.372, 14.864, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_423:
+  home: [4.375, 13.64, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_424:
+  home: [4.372, 9.668, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_425:
+  home: [4.375, 10.885, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_426:
+  home: [4.372, 12.108, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4518:
+  home: [-5.535, 23.911, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4522:
+  home: [-5.538, 22.694, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4523:
+  home: [-5.535, 21.471, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_456:
+  home: [-15.455, 17.688, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_457:
+  home: [-15.452, 18.905, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_458:
+  home: [-15.455, 20.128, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4581:
+  home: [-5.499, 20.02, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4582:
+  home: [-5.496, 18.797, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4583:
+  home: [-5.499, 17.58, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4589:
+  home: [-5.575, 16.011, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_459:
+  home: [-15.452, 13.685, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4590:
+  home: [-5.578, 14.794, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4591:
+  home: [-5.575, 13.571, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_460:
+  home: [-15.455, 14.908, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_461:
+  home: [-15.452, 16.125, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4610:
+  home: [-5.578, 9.599, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4611:
+  home: [-5.575, 10.815, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_4612:
+  home: [-5.578, 12.039, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_462:
+  home: [-15.452, 21.635, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_463:
+  home: [-15.455, 22.858, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_464:
+  home: [-15.452, 24.075, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_5:
+  home: [-25.245, 17.688, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_6:
+  home: [-25.242, 18.905, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_76:
+  home: [-25.242, 24.1, -90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_77:
+  home: [-25.245, 22.883, 90.0]
+  label: palette
+  spots: {}
+SM_PaletteA_78:
+  home: [-25.242, 21.66, -90.0]
+  label: palette
+  spots: {}
+SM_PushcartA_02_22:
+  home: [-2.83, 12.85, -70.0]
+  label: cart
+  spots: {}
+S_TrafficCone2:
+  home: [-4.08, 9.33, 0.0]
+  label: cone
+  spots:
+    aisle_a: [2.0, 2.0, 0.0]
+    aisle_b: [-3.0, 4.0, 45.0]
+S_TrafficCone3:
+  home: [-1.84, 9.33, 0.0]
+  label: cone
+  spots: {}
+S_TrafficCone4:
+  home: [-2.95, 14.43, 0.0]
+  label: cone
+  spots: {}
+S_TrafficCone5:
+  home: [-1.95, 14.14, 0.0]
+  label: cone
+  spots: {}
+S_TrafficCone6:
+  home: [-3.99, 14.14, 0.0]
+  label: cone
+  spots: {}
+S_TrafficCone_2:
+  home: [-2.95, 8.99, 0.0]
+  label: cone
+  spots: {}
+forklift:
+  home: [3.18, 10.8, 90.0]
+  label: forklift
+  spots: {}

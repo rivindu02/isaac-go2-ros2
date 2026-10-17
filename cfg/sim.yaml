@@ -10,6 +10,20 @@ env_name: full-warehouse
 #env_name: office
 dataset_path: "/home/ubuntu/isaac-go2-ros2/mesh.usd"
 
+# Re-place scene objects on command: ./sim_objects.sh list|move (ros2/object_mover.py)
+object_mover:
+  enable: True
+  # prim names that may move (regex, case-insensitive); the top-most matching prim moves as one
+  allow: "Forklift|CardBox|Carton|Box|Pallet|Palette|Barel|Barrel|Bucket|Cone|Sign|Crate|Bottle|Bin|Extinguisher|Trolley|Cart"
+  # never move these, even if `allow` matches
+  deny: "Fuse|Rack|Shelf|Shelves|Wall|Floor|Ceiling|Light|Lamp|Pillar|Column|Beam|Door|Window|Roof|Stair"
+  floor_z: 0.0          # moved objects are set down at this height
+  max_base_z: 0.3       # objects starting higher (on racks, stacked) are not movable
+  bounds: null          # [xmin, ymin, xmax, ymax] placement area; null = outline of the `wall` prims
+  wall: "Wall"          # prim names (regex) of the building's walls, used for the placement area
+  max_obstacle_area: 40.0  # larger static prims (floor, ceiling) are left out of the obstacle list
+  resync_physics: True     # rebuild moved colliders so the robot really collides at the new pose
+
 sensor:
   enable_lidar: False
   enable_camera: False
