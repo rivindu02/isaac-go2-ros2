@@ -14,9 +14,11 @@ parser = argparse.ArgumentParser(description="Tutorial on running the cartpole R
 AppLauncher.add_app_launcher_args(parser)
 # parse the arguments
 args_cli, extra_args = parser.parse_known_args()
-args_cli.headless = True
+# ISAAC_GUI=1 (isaac-launch.sh --gui): open a window on $DISPLAY instead of the WebRTC livestream
+isaac_gui = os.environ.get("ISAAC_GUI", "0") == "1"
+args_cli.headless = not isaac_gui
 args_cli.enable_cameras = True
-args_cli.livestream = 2
+args_cli.livestream = 0 if isaac_gui else 2
 
 import sys
 import os

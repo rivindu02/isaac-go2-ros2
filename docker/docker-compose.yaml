@@ -23,6 +23,7 @@ services:
       
       # X11 forwarding for GUI
       - DISPLAY=${DISPLAY}
+      - ISAAC_GUI=${ISAAC_GUI:-0}
       
       # ROS2 configuration
       - AUTO_BUILD=${AUTO_BUILD}
